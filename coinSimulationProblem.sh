@@ -2,20 +2,33 @@
 
 echo "Welcome to the Flip Coin Simulation Game"
 
-noOfHead=0 #variable to store the count of Head wins
-noOfTail=0 #variable to store the count of Tail wins
+numOfHead=0 #variable to store the count of Head wins
+numOfTail=0 #variable to store the count of Tail wins
 
-for ((i=0;i<20;i++))
+# Continue Flipping the coin utill either numOfHead or numOfTail reached 21
+while [[ $numOfHead -lt 21 && $numOfTail -lt 21 ]]
 do
 	toss=$((RANDOM%2)) # toss will randomly store either 0 or 1
 	if [[ $toss -eq 0 ]]
 	then
-		((noOfTail++)) 
+		((numOfTail++)) 
 	else
-		((noOfHead++))
+		((numOfHead++))
 	fi
 	
 done
 
-echo "Head has won $noOfHead times"
-echo "Tail has won $noOfTail times"
+echo "Number of Head wins : $numOfHead"
+echo "And Number of Tail wins : $numOfTail"
+
+#condition to check who won the match 
+
+if [[ $numOfHead -gt $numOfTail ]]
+then
+	echo "So Finally, Head wins by $(( $numOfHead - $numOfTail ))"
+elif [[ $numOfHead -lt $numOfTail ]]
+then 
+	echo "So Finally, Tail Wins by $(( $numOfTail - $numOfHead ))"
+else
+	echo " So Match tied"
+fi
